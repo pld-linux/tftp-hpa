@@ -9,7 +9,7 @@ Release:	1
 License:	BSD
 Group:		Applications/Networking
 Source0:	 ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
-Source1:	%{name}.inetd
+Source1:	tftpd-hpa.inetd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
