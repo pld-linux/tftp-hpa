@@ -4,14 +4,13 @@ Summary(fr):	Client pour le « trivial file transfer protocol » (tftp)
 Summary(pl):	Klient TFTP (Trivial File Transfer Protocol)
 Summary(tr):	Ýlkel dosya aktarým protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
-Version:	0.37
-Release:	2
+Version:	0.38
+Release:	1
 License:	BSD
 Group:		Applications/Networking
-Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
-# Source0-md5:	f9a0f314e86bf84a173a3036b319550c
+Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.bz2
+# Source0-md5:	fa0088f0c1f4e548a2c7c390deb98549
 Source1:	tftpd-hpa.inetd
-Patch0:		%{name}-configure.in.patch
 BuildRequires:	automake
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.159
@@ -89,7 +88,6 @@ nale¿y on do aplikacji o niskim poziomie bezpieczeñstwa.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
