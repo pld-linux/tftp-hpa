@@ -8,7 +8,7 @@ Version:	0.30
 Release:	1
 License:	BSD
 Group:		Applications/Networking
-Source0:	 ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
 Source1:	tftpd-hpa.inetd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -77,7 +77,7 @@ instalowany tylko wtedy, kiedy zachodzi taka konieczno¶æ poniewa¿
 nale¿y on do aplikacji o niskim poziomie bezpieczeñstwa.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 CFLAGS="%{rpmcflags}"; export CFLAGS
