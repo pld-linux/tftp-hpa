@@ -10,6 +10,7 @@ License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
 Source1:	tftpd-hpa.inetd
+BuildRequires:	readline-devel
 Provides:	tftpdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	tftp
@@ -88,7 +89,9 @@ CFLAGS="%{rpmcflags}"; export CFLAGS
 
 ./configure \
 	--with-c-compiler=gcc
-%{__make}
+%{__make} \
+	CC="%{__cc}" \
+	TFTPD_LIBS="-liberty"
 
 %install
 rm -rf $RPM_BUILD_ROOT
