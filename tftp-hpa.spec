@@ -104,15 +104,6 @@ mv -f $RPM_BUILD_ROOT%{_mandir}/man8/in.tftpd.8 $RPM_BUILD_ROOT%{_mandir}/man8/t
 rm -rf $RPM_BUILD_ROOT
 
 %pre -n tftpd-hpa
-if [ -n "`id -g tftp 2>/dev/null`" ]; then
-	if [ "`id -g tftp`" != "100" ]; then
-		echo "Error: group tftp doesn't have uid=100. Correct this before installing tftpd." 1>&2
-		exit 1
-	fi
-else
-	echo "Adding goup tftp GID=100."
-	/usr/sbin/groupadd -g 100 tftp 1>&2
-fi
 if [ -n "`id -u tftp 2>/dev/null`" ]; then
 	if [ "`id -u tftp`" != "15" ]; then
 		echo "Error: user tftp doesn't have uid=15. Correct this before installing tftpd." 1>&2
@@ -135,10 +126,6 @@ if [ "$1" = "0" -a -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd reload
 fi
 if [ "$1" = "0" ]; then
-        echo "Removing group tftp."
-	/usr/sbin/groupdel tftp
-fi
-if [ "$1" = "0" ]; then
         echo "Removing user tftp."
 	/usr/sbin/userdel tftp
 fi
@@ -153,5 +140,5 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/*
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/sysconfig/rc-inetd/tftpd
-%attr(750,tftp,tftp) %dir /var/lib/tftp
+%attr(750,tftp,root) %dir /var/lib/tftp
 %{_mandir}/man8/*
