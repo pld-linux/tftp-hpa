@@ -1,6 +1,6 @@
 Summary:	Client for the Trivial File Transfer Protocol (TFTP)
-Summary(de):	Client für das 'trivial file transfer protocol (tftp)'
-Summary(fr):	Client pour le « trivial file transfer protocol » (tftp)
+Summary(de):	Client für das 'trivial file transfer protocol (TFTP)'
+Summary(fr):	Client pour le « trivial file transfer protocol » (TFTP)
 Summary(pl):	Klient TFTP (Trivial File Transfer Protocol)
 Summary(tr):	Ýlkel dosya aktarým protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
@@ -10,35 +10,34 @@ License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.bz2
 # Source0-md5:	bfcdd49bf94900e610f2cc937d8980ef
-# Source0-size:	82442
 Source1:	tftpd-hpa.inetd
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.159
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	inetutils-tftp
 Obsoletes:	tftp
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for
-booting diskless workstations. This package contains tftp client.
+booting diskless workstations. This package contains TFTP client.
 
 %description -l de
-Das trivial file transfer protocol (tftp) wird in der Regel nur zum
+Das trivial file transfer protocol (TFTP) wird in der Regel nur zum
 Booten von disklosen Workstations benutzt. Es bietet nur geringe
 Sicherheit und sollte nur im Bedarfsfall aktiviert werden.
 
 %description -l fr
-Le « trivial file transfer protocol » (tftp) est normalement utilisé
+Le « trivial file transfer protocol » (TFTP) est normalement utilisé
 uniquement pour démarrer les stations de travail sans disque. Il offre
 très peu de sécurité et ne devrait pas être activé sauf si c'est
 nécessaire.
 
 %description -l pl
-Tftp (trivial file transfer protocol) jest u¿ywany g³ównie do
+TFTP (Trivial File Transfer Protocol) jest u¿ywany g³ównie do
 startowania stacji bezdyskowych z sieci. Pakiet ten zawiera aplikacjê
-tftp klienta.
+TFTP klienta.
 
 %description -l tr
 Ýlkel dosya aktarým protokolu genelde disksiz iþ istasyonlarýnýn að
@@ -46,10 +45,10 @@ tftp klienta.
 olduðundan zorunlu kalmadýkça çalýþtýrýlmamalýdýr.
 
 %package -n tftpd-hpa
-Summary:	Daemon for the trivial file transfer protocol (tftp)
-Summary(de):	Dämon für das 'trivial file transfer protocol (tftp)'
-Summary(fr):	Démon pour le « trivial file transfer protocol » (tftp)
-Summary(pl):	Serwer tftp (trivial file transfer protocol)
+Summary:	Daemon for the trivial file transfer protocol (TFTP)
+Summary(de):	Dämon für das 'trivial file transfer protocol (TFTP)'
+Summary(fr):	Démon pour le « trivial file transfer protocol » (TFTP)
+Summary(pl):	Serwer TFTP (Trivial File Transfer Protocol)
 Summary(tr):	Ýlkel dosya aktarým protokolu (TFTP) için sunucu ve istemci
 Group:		Networking/Daemons
 PreReq:		rc-inetd >= 0.8.1
@@ -68,25 +67,25 @@ Obsoletes:	utftpd
 
 %description -n tftpd-hpa
 The Trivial File Transfer Protocol (TFTP) is normally used only for
-booting diskless workstations. The tftp package provides the user
+booting diskless workstations. The tftp-hpa package provides the user
 interface for TFTP, which allows users to transfer files to and from a
 remote machine. It provides very little security, and should not be
 enabled unless it is needed.
 
 %description -n tftpd-hpa -l de
-Das trivial file transfer protocol (tftp) wird in der Regel nur zum
+Das trivial file transfer protocol (TFTP) wird in der Regel nur zum
 Booten von disklosen Workstations benutzt. Es bietet nur geringe
 Sicherheit und sollte nur im Bedarfsfall aktiviert werden.
 
 %description -n tftpd-hpa -l fr
-Le « trivial file transfer protocol » (tftp) est normalement utilisé
+Le « trivial file transfer protocol » (TFTP) est normalement utilisé
 uniquement pour démarrer les stations de travail sans disque. Il offre
 très peu de sécurité et ne devrait pas être activé sauf si c'est
 nécessaire.
 
 %description -n tftpd-hpa -l pl
 TFTP (Trivial File Transfer Protocol) jest u¿ywany g³ównie do
-startowania stacji bezdyskowych z sieci. Serwer tftp powinien byæ
+startowania stacji bezdyskowych z sieci. Serwer TFTP powinien byæ
 instalowany tylko wtedy, kiedy zachodzi taka konieczno¶æ poniewa¿
 nale¿y on do aplikacji o niskim poziomie bezpieczeñstwa.
 
