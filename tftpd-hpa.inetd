@@ -1,9 +1,0 @@
-SERVICE_NAME=tftp
-SOCK_TYPE=dgram
-PROTOCOL=udp
-PORT=69
-FLAGS=wait
-USER=root
-SERVER=tcpd
-DAEMON=/usr/sbin/tftpd
-DAEMONARGS="-u tftp -t 30 -s /var/lib/tftp"
