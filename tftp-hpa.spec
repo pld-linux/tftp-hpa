@@ -14,6 +14,7 @@ Source1:	tftpd-hpa.inetd
 Patch0:		%{name}-configure.in.patch
 BuildRequires:	automake
 BuildRequires:	readline-devel
+BuildRequires:	rpmbuild(macros) >= 1.159
 Obsoletes:	tftp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,7 +55,9 @@ Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires:	inetdaemon
+Provides:	group(tftp)
 Provides:	tftpdaemon
+Provides:	user(tftp)
 Obsoletes:	atftpd
 Obsoletes:	tftpd
 Obsoletes:	tftp-server
@@ -148,10 +151,8 @@ if [ "$1" = "0" -a -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd reload
 fi
 if [ "$1" = "0" ]; then
-	echo "Removing user tftp."
-	/usr/sbin/userdel tftp
-	echo "Removing group tftp."
-	/usr/sbin/groupdel tftp
+	%userremove tftp
+	%groupremove tftp
 fi
 
 %files
