@@ -5,7 +5,7 @@ Summary(pl):	Klient TFTP (Trivial File Transfer Protocol)
 Summary(tr):	Ýlkel dosya aktarým protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
 Version:	0.34
-Release:	1
+Release:	2
 License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
@@ -111,6 +111,17 @@ mv -f $RPM_BUILD_ROOT%{_mandir}/man8/in.tftpd.8 $RPM_BUILD_ROOT%{_mandir}/man8/t
 rm -rf $RPM_BUILD_ROOT
 
 %pre -n tftpd-hpa
+
+if [ -n "`getgid tftp`" ]; then
+	if [ "`getgid tftp`" != "59" ]; then
+		echo "Error: group tftp doesn't have gid=59. Correct this before installing tftp-hpa." 1>&2
+                exit 1
+        fi
+else
+        echo "Adding group tftp GID=59."
+        /usr/sbin/groupadd -g 59 -r -f tftp
+fi
+
 if [ -n "`id -u tftp 2>/dev/null`" ]; then
 	if [ "`id -u tftp`" != "15" ]; then
 		echo "Error: user tftp doesn't have uid=15. Correct this before installing tftpd." 1>&2
@@ -135,6 +146,8 @@ fi
 if [ "$1" = "0" ]; then
         echo "Removing user tftp."
 	/usr/sbin/userdel tftp
+	echo "Removing group tftp."
+	/usr/sbin/groupdel tftp
 fi
 
 %files
