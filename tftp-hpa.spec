@@ -92,6 +92,8 @@ nale¿y on do aplikacji o niskim poziomie bezpieczeñstwa.
 %prep
 %setup -q
 
+mv -f aclocal.m4 acinclude.m4
+
 %build
 cp -f /usr/share/automake/config.sub .
 %{__aclocal}
