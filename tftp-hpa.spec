@@ -14,7 +14,6 @@ Source1:	tftpd-hpa.inetd
 Patch0:		%{name}-configure.in.patch
 BuildRequires:	automake
 BuildRequires:	readline-devel
-Provides:	tftpdaemon
 Obsoletes:	tftp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -56,9 +55,10 @@ Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires:	inetdaemon
 Provides:	tftpdaemon
+Obsoletes:	atftpd
+Obsoletes:	tftpd
 Obsoletes:	tftp-server
 Obsoletes:	utftpd
-Obsoletes:	tftpd
 
 %description -n tftpd-hpa
 The Trivial File Transfer Protocol (TFTP) is normally used only for
