@@ -1,0 +1,19 @@
+diff -Nur tftp-hpa-0.37.orig/configure.in tftp-hpa-0.37.mod/configure.in
+--- tftp-hpa-0.37.orig/configure.in	2004-01-15 21:15:46.000000000 +0100
++++ tftp-hpa-0.37.mod/configure.in	2004-07-09 16:43:12.000000000 +0200
+@@ -129,12 +129,9 @@
+ OBJROOT=`pwd`
+ 
+ LIBXTRA=false
+-AC_SEARCH_LIBS(xmalloc, iberty, , LIBXTRA=true AC_LIBOBJ(xmalloc))
+-AC_SEARCH_LIBS(xstrdup, iberty, , LIBXTRA=true AC_LIBOBJ(xstrdup))
+-AC_SEARCH_LIBS(bsd_signal, bsd, , LIBXTRA=true AC_LIBOBJ(bsdsignal))
+-if $LIBXTRA; then
+-	XTRALIBS="$OBJROOT/lib/libxtra.a $XTRALIBS"
+-fi
++AC_SEARCH_LIBS(xmalloc, iberty, , )
++AC_SEARCH_LIBS(xstrdup, iberty, , )
++AC_SEARCH_LIBS(bsd_signal, bsd, , )
+ 
+ dnl
+ dnl These libraries apply to the server only
