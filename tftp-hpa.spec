@@ -129,7 +129,7 @@ if [ -n "`id -u tftp 2>/dev/null`" ]; then
 	fi
 else
 	echo "Adding user tftp UID=15."
-	/usr/sbin/useradd -u 15 -r -d /var/lib/tftp -s /bin/false -c "TFTP User" -g tftp tftp 1>&2
+	/usr/sbin/useradd -u 15 -r -d /var/lib/tftp -s /bin/false -c "TFTP User" -g ftp tftp 1>&2
 fi
 
 %post -n tftpd-hpa
