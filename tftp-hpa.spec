@@ -11,6 +11,7 @@ Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.bz2
 # Source0-md5:	c3b27b182462d4958187e1e0c99f9240
 Source1:	tftpd-hpa.inetd
+BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.159
