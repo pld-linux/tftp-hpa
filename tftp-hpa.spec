@@ -5,7 +5,7 @@ Summary(pl):	Klient TFTP (Trivial File Transfer Protocol)
 Summary(tr):	Ýlkel dosya aktarým protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
 Version:	0.32
-Release:	1
+Release:	2
 License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
@@ -147,5 +147,5 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/*
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/sysconfig/rc-inetd/tftpd
-%attr(750,tftp,root) %dir /var/lib/tftp
+%attr(750,tftp,ftp) %dir /var/lib/tftp
 %{_mandir}/man8/*
