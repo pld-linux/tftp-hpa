@@ -9,6 +9,7 @@ Release:	2
 License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
+# Source0-md5:	a42049b8e21f6a4a99536ef432619461
 Source1:	tftpd-hpa.inetd
 BuildRequires:	readline-devel
 Provides:	tftpdaemon
