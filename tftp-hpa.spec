@@ -96,7 +96,7 @@ CFLAGS="%{rpmcflags}"; export CFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{%{_bindir},%{_sbindir},/etc/sysconfig/rc-inetd} \
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},/etc/sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_mandir}/man{1,8},/var/lib/tftp}
 
 %{__make} install \
@@ -116,11 +116,11 @@ rm -rf $RPM_BUILD_ROOT
 if [ -n "`getgid tftp`" ]; then
 	if [ "`getgid tftp`" != "59" ]; then
 		echo "Error: group tftp doesn't have gid=59. Correct this before installing tftp-hpa." 1>&2
-                exit 1
-        fi
+		exit 1
+	fi
 else
-        echo "Adding group tftp GID=59."
-        /usr/sbin/groupadd -g 59 -r -f tftp
+	echo "Adding group tftp GID=59."
+	/usr/sbin/groupadd -g 59 -r -f tftp
 fi
 
 if [ -n "`id -u tftp 2>/dev/null`" ]; then
@@ -145,7 +145,7 @@ if [ "$1" = "0" -a -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd reload
 fi
 if [ "$1" = "0" ]; then
-        echo "Removing user tftp."
+	echo "Removing user tftp."
 	/usr/sbin/userdel tftp
 	echo "Removing group tftp."
 	/usr/sbin/groupdel tftp
