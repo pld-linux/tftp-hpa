@@ -77,7 +77,7 @@ instalowany tylko wtedy, kiedy zachodzi taka konieczno¶æ poniewa¿
 nale¿y on do aplikacji o niskim poziomie bezpieczeñstwa.
 
 %prep
-%setup -q -n tftp-hpa-%{name}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 CFLAGS="%{rpmcflags}"; export CFLAGS
