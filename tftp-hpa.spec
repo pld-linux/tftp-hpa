@@ -10,7 +10,9 @@ License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
 Source1:	tftpd-hpa.inetd
+Provides:	tftpdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	tftp
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for
@@ -50,7 +52,9 @@ Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires:	inetdaemon
 Provides:	tftpdaemon
-Obsoletes:	tftp-server, utftpd, tftpd
+Obsoletes:	tftp-server
+Obsoletes:	utftpd
+Obsoletes:	tftpd
 
 %description -n tftpd-hpa
 The Trivial File Transfer Protocol (TFTP) is normally used only for
