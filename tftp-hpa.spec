@@ -11,7 +11,6 @@ Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.gz
 Source1:	tftpd-hpa.inetd
 BuildRequires:	readline-devel
-BuildRequires:	binutils
 Provides:	tftpdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	tftp
