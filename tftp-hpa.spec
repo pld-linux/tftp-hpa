@@ -14,7 +14,7 @@ Source1:	tftpd-hpa.inetd
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel
-BuildRequires:	rpmbuild(macros) >= 1.159
+BuildRequires:	rpmbuild(macros) >= 1.202
 Obsoletes:	inetutils-tftp
 Obsoletes:	tftp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -121,26 +121,8 @@ mv -f $RPM_BUILD_ROOT%{_mandir}/man8/in.tftpd.8 $RPM_BUILD_ROOT%{_mandir}/man8/t
 rm -rf $RPM_BUILD_ROOT
 
 %pre -n tftpd-hpa
-
-if [ -n "`getgid tftp`" ]; then
-	if [ "`getgid tftp`" != "59" ]; then
-		echo "Error: group tftp doesn't have gid=59. Correct this before installing tftp-hpa." 1>&2
-		exit 1
-	fi
-else
-	echo "Adding group tftp GID=59."
-	/usr/sbin/groupadd -g 59 -r -f tftp
-fi
-
-if [ -n "`id -u tftp 2>/dev/null`" ]; then
-	if [ "`id -u tftp`" != "15" ]; then
-		echo "Error: user tftp doesn't have uid=15. Correct this before installing tftpd." 1>&2
-		exit 1
-	fi
-else
-	echo "Adding user tftp UID=15."
-	/usr/sbin/useradd -u 15 -r -d /var/lib/tftp -s /bin/false -c "TFTP User" -g tftp tftp 1>&2
-fi
+%groupadd -P tftpd-hpa -g 59 -r -f tftp
+%useradd -P tftpd-hpa -u 15 -r -d /var/lib/tftp -s /bin/false -c "TFTP User" -g tftp tftp
 
 %post -n tftpd-hpa
 if [ -f /var/lock/subsys/rc-inetd ]; then
@@ -150,10 +132,10 @@ else
 fi
 
 %postun -n tftpd-hpa
-if [ "$1" = "0" -a -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload
-fi
 if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/rc-inetd ]; then
+		/etc/rc.d/init.d/rc-inetd reload
+	fi
 	%userremove tftp
 	%groupremove tftp
 fi
