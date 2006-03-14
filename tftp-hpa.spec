@@ -14,7 +14,7 @@ Source1:	tftpd-hpa.inetd
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel
-BuildRequires:	rpmbuild(macros) >= 1.202
+BuildRequires:	rpmbuild(macros) >= 1.268
 Obsoletes:	inetutils-tftp
 Obsoletes:	tftp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -61,8 +61,8 @@ Provides:	tftpdaemon
 Provides:	user(tftp)
 Obsoletes:	atftpd
 Obsoletes:	inetutils-tftpd
-Obsoletes:	tftpd
 Obsoletes:	tftp-server
+Obsoletes:	tftpd
 Obsoletes:	utftpd
 
 %description -n tftpd-hpa
@@ -125,17 +125,11 @@ rm -rf $RPM_BUILD_ROOT
 %useradd -P tftpd-hpa -u 15 -r -d /var/lib/tftp -s /bin/false -c "TFTP User" -g tftp tftp
 
 %post -n tftpd-hpa
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server." 1>&2
-fi
+%service -q rc-inetd reload
 
 %postun -n tftpd-hpa
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/rc-inetd ]; then
-		/etc/rc.d/init.d/rc-inetd reload
-	fi
+	%service -q rc-inetd reload
 	%userremove tftp
 	%groupremove tftp
 fi
