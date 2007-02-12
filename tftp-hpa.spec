@@ -1,8 +1,8 @@
 Summary:	Client for the Trivial File Transfer Protocol (TFTP)
-Summary(de.UTF-8):   Client für das 'trivial file transfer protocol (TFTP)'
-Summary(fr.UTF-8):   Client pour le « trivial file transfer protocol » (TFTP)
-Summary(pl.UTF-8):   Klient TFTP (Trivial File Transfer Protocol)
-Summary(tr.UTF-8):   İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
+Summary(de.UTF-8):	Client für das 'trivial file transfer protocol (TFTP)'
+Summary(fr.UTF-8):	Client pour le « trivial file transfer protocol » (TFTP)
+Summary(pl.UTF-8):	Klient TFTP (Trivial File Transfer Protocol)
+Summary(tr.UTF-8):	İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
 Version:	0.48
 Release:	1
@@ -46,10 +46,10 @@ olduğundan zorunlu kalmadıkça çalıştırılmamalıdır.
 
 %package -n tftpd-hpa
 Summary:	Daemon for the trivial file transfer protocol (TFTP)
-Summary(de.UTF-8):   Dämon für das 'trivial file transfer protocol (TFTP)'
-Summary(fr.UTF-8):   Démon pour le « trivial file transfer protocol » (TFTP)
-Summary(pl.UTF-8):   Serwer TFTP (Trivial File Transfer Protocol)
-Summary(tr.UTF-8):   İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
+Summary(de.UTF-8):	Dämon für das 'trivial file transfer protocol (TFTP)'
+Summary(fr.UTF-8):	Démon pour le « trivial file transfer protocol » (TFTP)
+Summary(pl.UTF-8):	Serwer TFTP (Trivial File Transfer Protocol)
+Summary(tr.UTF-8):	İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
 Group:		Networking/Daemons
 Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
