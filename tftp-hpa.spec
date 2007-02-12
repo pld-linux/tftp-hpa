@@ -1,8 +1,8 @@
 Summary:	Client for the Trivial File Transfer Protocol (TFTP)
-Summary(de):	Client für das 'trivial file transfer protocol (TFTP)'
-Summary(fr):	Client pour le « trivial file transfer protocol » (TFTP)
-Summary(pl):	Klient TFTP (Trivial File Transfer Protocol)
-Summary(tr):	Ýlkel dosya aktarým protokolu (TFTP) için sunucu ve istemci
+Summary(de.UTF-8):   Client fÃ¼r das 'trivial file transfer protocol (TFTP)'
+Summary(fr.UTF-8):   Client pour le Â« trivial file transfer protocol Â» (TFTP)
+Summary(pl.UTF-8):   Klient TFTP (Trivial File Transfer Protocol)
+Summary(tr.UTF-8):   Ä°lkel dosya aktarÄ±m protokolu (TFTP) iÃ§in sunucu ve istemci
 Name:		tftp-hpa
 Version:	0.48
 Release:	1
@@ -23,33 +23,33 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 The Trivial File Transfer Protocol (TFTP) is normally used only for
 booting diskless workstations. This package contains TFTP client.
 
-%description -l de
+%description -l de.UTF-8
 Das trivial file transfer protocol (TFTP) wird in der Regel nur zum
 Booten von disklosen Workstations benutzt. Es bietet nur geringe
 Sicherheit und sollte nur im Bedarfsfall aktiviert werden.
 
-%description -l fr
-Le « trivial file transfer protocol » (TFTP) est normalement utilisé
-uniquement pour démarrer les stations de travail sans disque. Il offre
-très peu de sécurité et ne devrait pas être activé sauf si c'est
-nécessaire.
+%description -l fr.UTF-8
+Le Â« trivial file transfer protocol Â» (TFTP) est normalement utilisÃ©
+uniquement pour dÃ©marrer les stations de travail sans disque. Il offre
+trÃ¨s peu de sÃ©curitÃ© et ne devrait pas Ãªtre activÃ© sauf si c'est
+nÃ©cessaire.
 
-%description -l pl
-TFTP (Trivial File Transfer Protocol) jest u¿ywany g³ównie do
-startowania stacji bezdyskowych z sieci. Pakiet ten zawiera aplikacjê
+%description -l pl.UTF-8
+TFTP (Trivial File Transfer Protocol) jest uÅ¼ywany gÅ‚Ã³wnie do
+startowania stacji bezdyskowych z sieci. Pakiet ten zawiera aplikacjÄ™
 TFTP klienta.
 
-%description -l tr
-Ýlkel dosya aktarým protokolu genelde disksiz iþ istasyonlarýnýn að
-üzerinden açýlmalarýnda kullanýlýr. Güvenlik denetimleri çok az
-olduðundan zorunlu kalmadýkça çalýþtýrýlmamalýdýr.
+%description -l tr.UTF-8
+Ä°lkel dosya aktarÄ±m protokolu genelde disksiz iÅŸ istasyonlarÄ±nÄ±n aÄŸ
+Ã¼zerinden aÃ§Ä±lmalarÄ±nda kullanÄ±lÄ±r. GÃ¼venlik denetimleri Ã§ok az
+olduÄŸundan zorunlu kalmadÄ±kÃ§a Ã§alÄ±ÅŸtÄ±rÄ±lmamalÄ±dÄ±r.
 
 %package -n tftpd-hpa
 Summary:	Daemon for the trivial file transfer protocol (TFTP)
-Summary(de):	Dämon für das 'trivial file transfer protocol (TFTP)'
-Summary(fr):	Démon pour le « trivial file transfer protocol » (TFTP)
-Summary(pl):	Serwer TFTP (Trivial File Transfer Protocol)
-Summary(tr):	Ýlkel dosya aktarým protokolu (TFTP) için sunucu ve istemci
+Summary(de.UTF-8):   DÃ¤mon fÃ¼r das 'trivial file transfer protocol (TFTP)'
+Summary(fr.UTF-8):   DÃ©mon pour le Â« trivial file transfer protocol Â» (TFTP)
+Summary(pl.UTF-8):   Serwer TFTP (Trivial File Transfer Protocol)
+Summary(tr.UTF-8):   Ä°lkel dosya aktarÄ±m protokolu (TFTP) iÃ§in sunucu ve istemci
 Group:		Networking/Daemons
 Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
@@ -72,22 +72,22 @@ interface for TFTP, which allows users to transfer files to and from a
 remote machine. It provides very little security, and should not be
 enabled unless it is needed.
 
-%description -n tftpd-hpa -l de
+%description -n tftpd-hpa -l de.UTF-8
 Das trivial file transfer protocol (TFTP) wird in der Regel nur zum
 Booten von disklosen Workstations benutzt. Es bietet nur geringe
 Sicherheit und sollte nur im Bedarfsfall aktiviert werden.
 
-%description -n tftpd-hpa -l fr
-Le « trivial file transfer protocol » (TFTP) est normalement utilisé
-uniquement pour démarrer les stations de travail sans disque. Il offre
-très peu de sécurité et ne devrait pas être activé sauf si c'est
-nécessaire.
+%description -n tftpd-hpa -l fr.UTF-8
+Le Â« trivial file transfer protocol Â» (TFTP) est normalement utilisÃ©
+uniquement pour dÃ©marrer les stations de travail sans disque. Il offre
+trÃ¨s peu de sÃ©curitÃ© et ne devrait pas Ãªtre activÃ© sauf si c'est
+nÃ©cessaire.
 
-%description -n tftpd-hpa -l pl
-TFTP (Trivial File Transfer Protocol) jest u¿ywany g³ównie do
-startowania stacji bezdyskowych z sieci. Serwer TFTP powinien byæ
-instalowany tylko wtedy, kiedy zachodzi taka konieczno¶æ poniewa¿
-nale¿y on do aplikacji o niskim poziomie bezpieczeñstwa.
+%description -n tftpd-hpa -l pl.UTF-8
+TFTP (Trivial File Transfer Protocol) jest uÅ¼ywany gÅ‚Ã³wnie do
+startowania stacji bezdyskowych z sieci. Serwer TFTP powinien byÄ‡
+instalowany tylko wtedy, kiedy zachodzi taka koniecznoÅ›Ä‡ poniewaÅ¼
+naleÅ¼y on do aplikacji o niskim poziomie bezpieczeÅ„stwa.
 
 %prep
 %setup -q
