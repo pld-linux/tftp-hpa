@@ -50,7 +50,7 @@ Summary(de.UTF-8):	Dämon für das 'trivial file transfer protocol (TFTP)'
 Summary(fr.UTF-8):	Démon pour le « trivial file transfer protocol » (TFTP)
 Summary(pl.UTF-8):	Serwer TFTP (Trivial File Transfer Protocol)
 Summary(tr.UTF-8):	İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
-Group:		Networking/Daemons
+Group:		Networking/Daemons/FTP
 Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/useradd
