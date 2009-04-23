@@ -1,0 +1,53 @@
+# Connect with IPv4 only
+#LISTEN_IPV4=yes
+
+# Connect with IPv6 only
+#LISTEN_IPV6=yes
+
+# Specify a specific address and port to listen on.
+# The format is [address][:port]
+#ADDRESS=
+
+# Allow new files to be created.
+#CREATE=no
+
+# Sets the umask for newly created files to the specified value.
+#CREATEUMASK=0027
+
+# Determine the default timeout, in microseconds, before the first
+# packet is retransmitted. The default is 1000000 (1 second.)
+#TIMEOUT=1000000
+
+# Specify the use of filename remapping. The $MAPFILE is a file
+# containing  the  remapping  rules.
+#MAPFILE=
+
+# Specifies the maximum permitted block size.  The permitted range
+# for  this parameter is from 512 to 65464.
+#BLOCKSIZE=
+
+# Force  the  server port number (the Transaction ID) to be in the
+# specified range of port numbers. The format is port:port
+#PORTRANGE=
+
+# Set the logging verbosity of tftpd.
+VERBOSE=yes
+#VERBOSITY=
+
+# Indicate  that  a  specific RFC 2347 TFTP option should never be accepted.
+# Valid options are: blksize, blksize2, tsize, timeout, utimeout
+#REFUSE_OPTIONS=
+
+# The username which tftpd will run as.
+USER=tftp
+
+# Change root directory on startup.
+SECURE=yes
+
+# Perform no additional permissions checks above the normal system-provided
+# access controls for the user specified via the $USER option
+#PERMISSIVE=no
+
+# Space separated list of directories that tftpd will serve.
+# When $SECURE is "yes" then only one directory may be specified.
+DIRECTORY="/var/lib/tftp"

@@ -1,0 +1,109 @@
+#!/bin/sh
+#
+# tfpd		tftp-hpa server
+#
+# chkconfig:	345 85 15
+# description:	Trivial File Transfer Protocol server.
+# processname:	tftpd
+# pidfile:	/var/run/tftpd.pid
+# config:	
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
+[ -f /etc/sysconfig/tftpd ] && . /etc/sysconfig/tftpd
+
+# Check that networking is up.
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network -a "$1" != stop -a "$1" != status ]; then
+		msg_network_down tftpd
+		exit 1
+	fi
+else
+	exit 0
+fi
+
+start() {
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/tftpd ]; then
+		TFTPD_OPTS="-l"
+		is_yes "$LISTEN_IPV4" && TFTPD_OPTS="$TFTPD_OPTS -4"
+		is_yes "$LISTEN_IPV6" && TFTPD_OPTS="$TFTPD_OPTS -6"
+		[ -n "$ADDRESS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -a $ADDRESS"
+		is_yes "$CREATE" && TFTPD_OPTS="$TFTPD_OPTS -c"
+		[ -n "$CREATEUMASK" ] &&  TFTPD_OPTS="$TFTPD_OPTS -U $CREATEUMASK"
+		[ -n "$TIMEOUT" ] &&  TFTPD_OPTS="$TFTPD_OPTS -T $TIMEOUT"
+		[ -n "$MAPFILE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -m $MAPFILE"
+		[ -n "$BLOCKSIZE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -B $BLOCKSIZE"
+		[ -n "$PORTRANGE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -R $PORTRANGE"
+		is_yes "$VERBOSE" && TFTPD_OPTS="$TFTPD_OPTS -v"
+		[ -n "$VERBOSITY" ] &&  TFTPD_OPTS="$TFTPD_OPTS --verbosity $VERBOSITY"
+		[ -n "$REFUSE_OPTIONS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -r $REFUSE_OPTIONS"
+		[ -n "$USER" ] &&  TFTPD_OPTS="$TFTPD_OPTS -u $USER"
+		is_yes "$SECURE" && TFTPD_OPTS="$TFTPD_OPTS -s"
+		is_yes "$PERMISSIVE" &&  TFTPD_OPTS="$TFTPD_OPTS -p"
+		TFTPD_OPTS="$TFTPD_OPTS $DIRECTORY"
+		msg_starting TFTPD
+		daemon tftpd $TFTPD_OPTS
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/tftpd
+	else
+		msg_already_running TFTPD
+	fi
+}
+
+stop() {
+	# Stop daemons.
+	if [ -f /var/lock/subsys/tftpd ]; then
+		msg_stopping TFTPD
+		killproc tftpd
+		rm -f /var/lock/subsys/tftpd /var/run/tftpd* > /dev/null 2>&1
+	else
+		msg_not_running TFTPD
+	fi
+}
+
+condrestart() {
+	if [ -f /var/lock/subsys/tftpd ]; then
+		stop
+		start
+	else
+		msg_not_running TFTPD
+		RETVAL=$1
+	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart)
+	stop
+	start
+	;;
+  try-restart)
+	condrestart 0
+	;;
+  force-reload)
+	condrestart 7
+	;;
+  status)
+	status tftpd
+	exit $?
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|try-restart|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
