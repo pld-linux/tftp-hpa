@@ -38,14 +38,11 @@ VERBOSE=yes
 # Valid options are: blksize, blksize2, tsize, timeout, utimeout
 #REFUSE_OPTIONS=
 
-# The username which tftpd will run as.
-USER=tftp
-
 # Change root directory on startup.
 SECURE=yes
 
 # Perform no additional permissions checks above the normal system-provided
-# access controls for the user specified via the $USER option
+# access controls for the user tftp
 #PERMISSIVE=no
 
 # Space separated list of directories that tftpd will serve.

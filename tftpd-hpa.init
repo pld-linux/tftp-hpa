@@ -31,7 +31,7 @@ fi
 start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/tftpd ]; then
-		TFTPD_OPTS="-l"
+		TFTPD_OPTS="-l -u tftp"
 		is_yes "$LISTEN_IPV4" && TFTPD_OPTS="$TFTPD_OPTS -4"
 		is_yes "$LISTEN_IPV6" && TFTPD_OPTS="$TFTPD_OPTS -6"
 		[ -n "$ADDRESS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -a $ADDRESS"
@@ -44,10 +44,13 @@ start() {
 		is_yes "$VERBOSE" && TFTPD_OPTS="$TFTPD_OPTS -v"
 		[ -n "$VERBOSITY" ] &&  TFTPD_OPTS="$TFTPD_OPTS --verbosity $VERBOSITY"
 		[ -n "$REFUSE_OPTIONS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -r $REFUSE_OPTIONS"
-		[ -n "$USER" ] &&  TFTPD_OPTS="$TFTPD_OPTS -u $USER"
 		is_yes "$SECURE" && TFTPD_OPTS="$TFTPD_OPTS -s"
 		is_yes "$PERMISSIVE" &&  TFTPD_OPTS="$TFTPD_OPTS -p"
-		TFTPD_OPTS="$TFTPD_OPTS $DIRECTORY"
+		if [ -z "$DIRECTORY" ]; then
+			TFTPD_OPTS="$TFTPD_OPTS /var/lib/tftp"
+		else
+			TFTPD_OPTS="$TFTPD_OPTS $DIRECTORY"
+		fi
 		msg_starting TFTPD
 		daemon tftpd $TFTPD_OPTS
 		RETVAL=$?
