@@ -16,7 +16,7 @@
 . /etc/sysconfig/network
 
 # Get service config
-[ -f /etc/sysconfig/tftpd ] && . /etc/sysconfig/tftpd
+[ -f /etc/sysconfig/tftpd-hpa ] && . /etc/sysconfig/tftpd-hpa
 
 # Check that networking is up.
 if is_yes "${NETWORKING}"; then
