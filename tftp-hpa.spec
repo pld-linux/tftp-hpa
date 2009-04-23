@@ -141,8 +141,9 @@ cp -f /usr/share/automake/config.sub .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},/etc/sysconfig/rc-inetd} \
-	$RPM_BUILD_ROOT{%{_mandir}/man{1,8},/var/lib/tftp}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8}} \
+	$RPM_BUILD_ROOT{/etc/sysconfig/rc-inetd,/etc/rc.d/init.d} \
+	$RPM_BUILD_ROOT/var/lib/tftp
 
 %{__make} install \
 	INSTALLROOT=$RPM_BUILD_ROOT \
