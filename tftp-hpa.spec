@@ -14,8 +14,6 @@ Source1:	tftpd-hpa.inetd
 Source2:	tftpd-hpa.init
 Source3:	tftpd-hpa.sysconfig
 URL:		http://freshmeat.net/projects/tftp-hpa/
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.268
 Obsoletes:	inetutils-tftp
@@ -128,13 +126,7 @@ standalone.
 %prep
 %setup -q
 
-mv -f aclocal.m4 acinclude.m4
-
 %build
-cp -f /usr/share/automake/config.sub .
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
 %configure
 
 %{__make}
