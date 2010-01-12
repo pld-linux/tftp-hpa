@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	Klient TFTP (Trivial File Transfer Protocol)
 Summary(tr.UTF-8):	İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
 Version:	5.0
-Release:	4
+Release:	5
 License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/%{name}-%{version}.tar.bz2
@@ -173,7 +173,7 @@ fi
 /sbin/chkconfig --add tftpd-hpa
 %service tftpd-hpa restart
 
-%preun
+%preun -n tftpd-hpa-standalone
 if [ "$1" = "0" ]; then
 	%service tftpd-hpa stop
 	/sbin/chkconfig --del tftpd-hpa
