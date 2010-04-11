@@ -52,7 +52,7 @@ start() {
 			TFTPD_OPTS="$TFTPD_OPTS $DIRECTORY"
 		fi
 		msg_starting TFTPD
-		daemon tftpd $TFTPD_OPTS
+		daemon /usr/sbin/tftpd $TFTPD_OPTS
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/tftpd
 	else
