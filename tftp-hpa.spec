@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	Klient TFTP (Trivial File Transfer Protocol)
 Summary(tr.UTF-8):	İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
 Version:	5.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Applications/Networking
 Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/tftp-hpa/%{name}-%{version}.tar.xz
@@ -13,6 +13,15 @@ Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/tftp-hpa/%{name}-%{versi
 Source1:	tftpd-hpa.inetd
 Source2:	tftpd-hpa.init
 Source3:	tftpd-hpa.sysconfig
+# from FC
+Patch0:		tftp-0.40-remap.patch
+Patch1:		%{name}-0.39-tzfix.patch
+Patch2:		tftp-0.42-tftpboot.patch
+Patch3:		tftp-0.49-chk_retcodes.patch
+Patch4:		%{name}-0.49-fortify-strcpy-crash.patch
+Patch5:		tftp-0.49-cmd_arg.patch
+Patch6:		%{name}-0.49-stats.patch
+Patch7:		%{name}-5.2-pktinfo.patch
 URL:		http://freshmeat.net/projects/tftp-hpa/
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -86,8 +95,8 @@ należy on do aplikacji o niskim poziomie bezpieczeństwa.
 Summary:	inetd configs for tftpd-hpa
 Summary(pl.UTF-8):	Pliki konfiguracyjne do użycia tftpd-hpa poprzez inetd
 Group:		Networking/Daemons/FTP
-Requires:	tftpd-hpa-common = %{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
+Requires:	tftpd-hpa-common = %{version}-%{release}
 Provides:	tftpdaemon
 Obsoletes:	atftpd
 Obsoletes:	inetutils-tftpd
@@ -106,8 +115,8 @@ Pliki konfiguracyjna tftpd-hpa do startowania demona poprzez inetd.
 Summary:	Standalone daemon configs for tftpd-hpa
 Summary(pl.UTF-8):	Pliki konfiguracyjne do startowania tftpd-hpa w trybie standalone
 Group:		Networking/Daemons/FTP
-Requires:	tftpd-hpa-common = %{version}-%{release}
 Requires:	rc-scripts
+Requires:	tftpd-hpa-common = %{version}-%{release}
 Provides:	tftpdaemon
 Obsoletes:	atftpd
 Obsoletes:	inetutils-tftpd
@@ -125,6 +134,14 @@ standalone.
 
 %prep
 %setup -q
+%patch0 -p1 -b .zero
+%patch1 -p1 -b .tzfix
+%patch2 -p1 -b .tftpboot
+%patch3 -p1 -b .chk_retcodes
+%patch4 -p1 -b .fortify-strcpy-crash
+%patch5 -p1 -b .cmd_arg
+%patch6 -p1 -b .stats
+%patch7 -p1 -b .pktinfo
 
 %build
 %configure
