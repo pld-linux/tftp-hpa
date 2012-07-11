@@ -31,7 +31,7 @@ fi
 start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/tftpd ]; then
-		TFTPD_OPTS="-l -u tftp"
+		TFTPD_OPTS="-l -u tftp -P /var/run/tftpd.pid"
 		is_yes "$LISTEN_IPV4" && TFTPD_OPTS="$TFTPD_OPTS -4"
 		is_yes "$LISTEN_IPV6" && TFTPD_OPTS="$TFTPD_OPTS -6"
 		[ -n "$ADDRESS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -a $ADDRESS"
