@@ -6,8 +6,6 @@
 # description:	Trivial File Transfer Protocol server.
 # processname:	tftpd
 # pidfile:	/var/run/tftpd.pid
-# config:	
-
 
 # Source function library
 . /etc/rc.d/init.d/functions
