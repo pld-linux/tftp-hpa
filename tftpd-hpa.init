@@ -19,7 +19,7 @@
 # Check that networking is up.
 if is_yes "${NETWORKING}"; then
 	if [ ! -f /var/lock/subsys/network -a "$1" != stop -a "$1" != status ]; then
-		msg_network_down tftpd
+		msg_network_down "TFTPD"
 		exit 1
 	fi
 else
@@ -28,65 +28,68 @@ fi
 
 start() {
 	# Check if the service is already running?
-	if [ ! -f /var/lock/subsys/tftpd ]; then
-		TFTPD_OPTS="-l -u tftp -P /var/run/tftpd.pid"
-		is_yes "$LISTEN_IPV4" && TFTPD_OPTS="$TFTPD_OPTS -4"
-		is_yes "$LISTEN_IPV6" && TFTPD_OPTS="$TFTPD_OPTS -6"
-		[ -n "$ADDRESS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -a $ADDRESS"
-		is_yes "$CREATE" && TFTPD_OPTS="$TFTPD_OPTS -c"
-		[ -n "$CREATEUMASK" ] &&  TFTPD_OPTS="$TFTPD_OPTS -U $CREATEUMASK"
-		[ -n "$TIMEOUT" ] &&  TFTPD_OPTS="$TFTPD_OPTS -T $TIMEOUT"
-		[ -n "$MAPFILE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -m $MAPFILE"
-		[ -n "$BLOCKSIZE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -B $BLOCKSIZE"
-		[ -n "$PORTRANGE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -R $PORTRANGE"
-		is_yes "$VERBOSE" && TFTPD_OPTS="$TFTPD_OPTS -v"
-		[ -n "$VERBOSITY" ] &&  TFTPD_OPTS="$TFTPD_OPTS --verbosity $VERBOSITY"
-		[ -n "$REFUSE_OPTIONS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -r $REFUSE_OPTIONS"
-		is_yes "$SECURE" && TFTPD_OPTS="$TFTPD_OPTS -s"
-		is_yes "$PERMISSIVE" &&  TFTPD_OPTS="$TFTPD_OPTS -p"
-		if [ -z "$DIRECTORY" ]; then
-			TFTPD_OPTS="$TFTPD_OPTS /var/lib/tftp"
-		else
-			TFTPD_OPTS="$TFTPD_OPTS $DIRECTORY"
-		fi
-		msg_starting TFTPD
-		daemon /usr/sbin/tftpd $TFTPD_OPTS
-		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/tftpd
-	else
-		msg_already_running TFTPD
+	if [ -f /var/lock/subsys/tftpd ]; then
+		msg_already_running "TFTPD"
+		return
 	fi
+
+	TFTPD_OPTS="-l -u tftp -P /var/run/tftpd.pid"
+	is_yes "$LISTEN_IPV4" && TFTPD_OPTS="$TFTPD_OPTS -4"
+	is_yes "$LISTEN_IPV6" && TFTPD_OPTS="$TFTPD_OPTS -6"
+	[ -n "$ADDRESS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -a $ADDRESS"
+	is_yes "$CREATE" && TFTPD_OPTS="$TFTPD_OPTS -c"
+	[ -n "$CREATEUMASK" ] &&  TFTPD_OPTS="$TFTPD_OPTS -U $CREATEUMASK"
+	[ -n "$TIMEOUT" ] &&  TFTPD_OPTS="$TFTPD_OPTS -T $TIMEOUT"
+	[ -n "$MAPFILE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -m $MAPFILE"
+	[ -n "$BLOCKSIZE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -B $BLOCKSIZE"
+	[ -n "$PORTRANGE" ] &&  TFTPD_OPTS="$TFTPD_OPTS -R $PORTRANGE"
+	is_yes "$VERBOSE" && TFTPD_OPTS="$TFTPD_OPTS -v"
+	[ -n "$VERBOSITY" ] &&  TFTPD_OPTS="$TFTPD_OPTS --verbosity $VERBOSITY"
+	[ -n "$REFUSE_OPTIONS" ] &&  TFTPD_OPTS="$TFTPD_OPTS -r $REFUSE_OPTIONS"
+	is_yes "$SECURE" && TFTPD_OPTS="$TFTPD_OPTS -s"
+	is_yes "$PERMISSIVE" &&  TFTPD_OPTS="$TFTPD_OPTS -p"
+	if [ -z "$DIRECTORY" ]; then
+		TFTPD_OPTS="$TFTPD_OPTS /var/lib/tftp"
+	else
+		TFTPD_OPTS="$TFTPD_OPTS $DIRECTORY"
+	fi
+	msg_starting "TFTPD"
+	daemon /usr/sbin/tftpd $TFTPD_OPTS
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/tftpd
 }
 
 stop() {
 	# Stop daemons.
-	if [ -f /var/lock/subsys/tftpd ]; then
-		msg_stopping TFTPD
-		killproc tftpd
-		rm -f /var/lock/subsys/tftpd /var/run/tftpd* > /dev/null 2>&1
-	else
-		msg_not_running TFTPD
+	if [ ! -f /var/lock/subsys/tftpd ]; then
+		msg_not_running "TFTPD"
+		return
 	fi
+
+	msg_stopping "TFTPD"
+	killproc tftpd
+	rm -f /var/lock/subsys/tftpd /var/run/tftpd* > /dev/null 2>&1
 }
 
 condrestart() {
-	if [ -f /var/lock/subsys/tftpd ]; then
-		stop
-		start
-	else
-		msg_not_running TFTPD
+	if [ ! -f /var/lock/subsys/tftpd ]; then
+		msg_not_running "TFTPD"
 		RETVAL=$1
+		return
 	fi
+
+	stop
+	start
 }
 
 RETVAL=0
 # See how we were called.
 case "$1" in
   start)
-  	start
+	start
 	;;
   stop)
-  	stop
+	stop
 	;;
   restart)
 	stop
