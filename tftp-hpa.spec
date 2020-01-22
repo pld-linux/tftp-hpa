@@ -5,10 +5,10 @@ Summary(pl.UTF-8):	Klient TFTP (Trivial File Transfer Protocol)
 Summary(tr.UTF-8):	İlkel dosya aktarım protokolu (TFTP) için sunucu ve istemci
 Name:		tftp-hpa
 Version:	5.2
-Release:	5
+Release:	6
 License:	BSD
 Group:		Applications/Networking
-Source0:	ftp://ftp.kernel.org/pub/software/network/tftp/tftp-hpa/%{name}-%{version}.tar.xz
+Source0:	https://www.kernel.org/pub/software/network/tftp/tftp-hpa/%{name}-%{version}.tar.xz
 # Source0-md5:	e86f58164166804e8ae5a46010f29317
 Source1:	tftpd-hpa.inetd
 Source2:	tftpd-hpa.init
@@ -22,6 +22,7 @@ Patch4:		%{name}-0.49-fortify-strcpy-crash.patch
 Patch5:		tftp-0.49-cmd_arg.patch
 Patch6:		%{name}-0.49-stats.patch
 Patch7:		%{name}-5.2-pktinfo.patch
+Patch8:		tftp-enhanced-logging.patch
 URL:		http://freshmeat.net/projects/tftp-hpa/
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -142,6 +143,7 @@ standalone.
 %patch5 -p1 -b .cmd_arg
 %patch6 -p1 -b .stats
 %patch7 -p1 -b .pktinfo
+%patch8 -p1
 
 %build
 %configure
