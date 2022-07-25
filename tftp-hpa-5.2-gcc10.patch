@@ -1,0 +1,12 @@
+diff -up tftp-hpa-5.2/tftp/tftp.c.gcc10 tftp-hpa-5.2/tftp/tftp.c
+--- tftp-hpa-5.2/tftp/tftp.c.gcc10	2020-05-04 00:56:28.787896509 +0200
++++ tftp-hpa-5.2/tftp/tftp.c	2020-05-04 00:58:42.502901005 +0200
+@@ -48,7 +48,7 @@ extern int maxtimeout;
+ #define PKTSIZE    SEGSIZE+4
+ char ackbuf[PKTSIZE];
+ int timeout;
+-sigjmp_buf toplevel;
++extern sigjmp_buf toplevel;
+ sigjmp_buf timeoutbuf;
+ 
+ static void nak(int, const char *);
