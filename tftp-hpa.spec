@@ -136,16 +136,16 @@ standalone.
 
 %prep
 %setup -q
-%patch0 -p1 -b .zero
-%patch1 -p1 -b .tzfix
-%patch2 -p1 -b .tftpboot
-%patch3 -p1 -b .chk_retcodes
-%patch4 -p1 -b .fortify-strcpy-crash
-%patch5 -p1 -b .cmd_arg
-%patch6 -p1 -b .stats
-%patch7 -p1 -b .pktinfo
-%patch8 -p1
-%patch9 -p1
+%patch -P0 -p1 -b .zero
+%patch -P1 -p1 -b .tzfix
+%patch -P2 -p1 -b .tftpboot
+%patch -P3 -p1 -b .chk_retcodes
+%patch -P4 -p1 -b .fortify-strcpy-crash
+%patch -P5 -p1 -b .cmd_arg
+%patch -P6 -p1 -b .stats
+%patch -P7 -p1 -b .pktinfo
+%patch -P8 -p1
+%patch -P9 -p1
 
 %build
 %configure
